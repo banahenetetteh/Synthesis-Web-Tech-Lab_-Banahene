@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="author" content="Tetteh Banahene" />
+  <meta name="description" content="Book cinema tickets: pick a film, choose seats, see the price update as you go." />
+  <title>Berekuso Cinema - Book Tickets</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header id="top">
+    <h1>Berekuso Cinema</h1>
+    <p class="tagline">Four screens, one very good sound system</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#showing">Now showing</a></li>
+      <li><a href="#times">Showtimes</a></li>
+      <li><a href="#book">Book</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ===== Step 1: pick a film ===== -->
+    <section id="showing">
+      <h2>1. Pick a film</h2>
+      <p class="note">Base price includes a standard seat. Click a film to select it.</p>
+      <div id="film-grid"></div>
+    </section>
+
+
+    <!-- ===== Step 2: the showtimes table ===== -->
+    <section id="times">
+      <h2>2. Showtimes this week</h2>
+
+      <table>
+        <caption>Screenings for the week beginning 12 October</caption>
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Time</th>
+            <th scope="col">Screen</th>
+          </tr>
+        </thead>
+        <tbody id="times-body"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Afternoon shows, before 4pm, are GHS 10 cheaper per ticket.</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <figure>
+        <img
+          src="images/seating-plan.png"
+          alt="Seating plan for one screen: the screen at the front, three rows of standard seats in grey, and the back row of premium seats picked out in gold"
+          width="840" height="360" loading="lazy" />
+        <figcaption>Every screen is laid out the same way. The gold row at the back is premium.</figcaption>
+      </figure>
+    </section>
+
+
+    <!-- ===== Step 3: the form, and the running summary beside it ===== -->
+    <section id="book">
+      <h2>3. Book your seats</h2>
+
+      <div class="booking-layout">
+
+        <form id="booking-form" action="" method="get">
+
+          <fieldset>
+            <legend>Who's coming</legend>
+
+            <p>
+              <label for="full_name">Name (required)</label><br />
+              <input type="text" id="full_name" name="full_name" required minlength="2" />
+            </p>
+
+            <p>
+              <label for="phone">Phone, 10 digits</label><br />
+              <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" />
+            </p>
+
+            <p>
+              <label for="tickets">How many tickets (1 to 8)</label><br />
+              <input type="number" id="tickets" name="tickets" value="2" min="1" max="8" step="1" />
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Seat type (required)</legend>
+
+            <p><label><input type="radio" name="seat" value="standard" required /> Standard, included</label></p>
+            <p><label><input type="radio" name="seat" value="premium" /> Premium, back row, GHS 20 each</label></p>
+            <p><label><input type="radio" name="seat" value="recliner" /> Recliner, GHS 45 each</label></p>
+          </fieldset>
+
+          <fieldset>
+            <legend>When</legend>
+
+            <p>
+              <label for="showtime">Screening</label><br />
+              <select id="showtime" name="showtime"></select>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Add to your order</legend>
+
+            <p><label><input type="checkbox" name="extras" value="popcorn" /> Large popcorn, GHS 25</label></p>
+            <p><label><input type="checkbox" name="extras" value="drink" /> Soft drink, GHS 15</label></p>
+            <p><label><input type="checkbox" name="extras" value="combo" /> Sharing combo, GHS 60</label></p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Anything we should know?</legend>
+
+            <p>
+              <label for="notes">Note for the box office</label><br />
+              <textarea id="notes" name="notes" rows="3" cols="36" maxlength="150"></textarea><br />
+              <output id="char_count" for="notes"></output>
+            </p>
+          </fieldset>
+
+          <p>
+            <button type="submit">Confirm booking</button>
+            <button type="button" id="reset-btn">Start again</button>
+          </p>
+
+        </form>
+
+
+        <aside id="summary">
+          <h3>Your booking</h3>
+
+          <p class="film-pick" id="chosen-film">No film selected yet.</p>
+
+          <ul id="summary-lines"></ul>
+
+          <p class="total">Total: <output id="total">GHS 0.00</output></p>
+          <p id="status-line"></p>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p id="page-info"></p>
+    <p>Berekuso Cinema. A Web Technologies project by Tetteh Banahene. <a href="#top">Back to top</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
